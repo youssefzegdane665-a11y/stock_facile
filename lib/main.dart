@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+import 'screens/tests_screen.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.teal,
       ),
-      home: const HomePage(),
+      home: const TestsScreen(), // écran de test (partie 03)
     );
   }
 }

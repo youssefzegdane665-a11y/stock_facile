@@ -22,3 +22,24 @@ Q2.3
   c'est la base (AUTOINCREMENT) qui le génère.
 - `toMap()` n'ajoute `id` que s'il n'est pas null, pour laisser SQLite choisir
   l'id lors d'un insert.
+
+
+  Question de réflexion (partie 02)
+- On utilise un constructeur `factory` car il construit un objet à partir d'une
+  Map (avec des conversions de types) au lieu d'affecter directement des champs.
+- On écrit `(map['prix'] as num).toDouble()` car SQLite peut renvoyer un `int`
+  pour une valeur comme 5 : `as double` provoquerait alors une erreur.
+
+  ## Partie 03
+
+Q3.2
+- (1) Écrire deux fois `DatabaseHelper()` ne crée qu'un seul objet : le constructeur
+  `factory` renvoie à chaque fois la même instance `_instance`. C'est le principe
+  du singleton, que permet le mot-clé `factory` (il peut retourner un objet existant).
+- (2) `??=` affecte la valeur à droite seulement si la variable est null.
+  La base n'est donc ouverte qu'une seule fois.
+- (3) `onConfigure` est appelé à chaque ouverture de la base, et SQLite oublie
+  l'option des clés étrangères à chaque connexion. `onCreate` n'est appelé qu'une
+  fois : les clés étrangères seraient désactivées aux lancements suivants.
+- (4) `onCreate` n'est appelé qu'une seule fois dans la vie de l'application :
+  quand le fichier .db n'existe pas encore.
